@@ -2,7 +2,7 @@
 
 ## MCD:
 
-![MCD](https://github.com/AbdoPrDZ/Examen-PHP-2024/docs/screenshots/mcd.png)
+![MCD](https://raw.github.com/AbdoPrDZ/Examen-PHP-2024/main/docs/screenshots/mcd.png)
 
 ## Project files structure
 
