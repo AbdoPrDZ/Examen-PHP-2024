@@ -8,13 +8,13 @@ require "models/User.php";
 checkPage('register');
 
 // get parameters from request
-$firstName = getParameter('first_name');
-$lastName  = getParameter('last_name');
+$firstName = getParameter('first_name', '');
+$lastName  = getParameter('last_name', '');
 $gender    = getParameter('gender', 'male');
-$birthDate = getParameter('birth_date');
-$username  = getParameter('username');
-$password  = getParameter('password');
-$confirm   = getParameter('confirm');
+$birthDate = getParameter('birth_date', '');
+$username  = getParameter('username', '');
+$password  = getParameter('password', '');
+$confirm   = getParameter('confirm', '');
 
 // set all the request errors to null
 $errors = [
@@ -115,7 +115,7 @@ if (getMethod() == 'POST') {
       $gender,
       $birthDate,
       $username,
-      hash('md5', $password), // hash the sended password
+      $password,
     );
 
     // insert the new user
@@ -140,21 +140,23 @@ if (getMethod() == 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Register</title>
 
   <link href="resources/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
-  <?php
-    include 'views/menu.php';
-  ?>
-
   <div class="container">
+
+    <?php
+      include 'views/menu.php';
+    ?>
+
     <h1>Register</h1>
 
     <form action="" method="post">
-      
+
       <div class="mb-3">
         <label for="first-name" class="form-label">First name:</label>
         <input type="text" name="first_name" id="first-name" value="<?= $firstName ?>" class="form-control <?= $errors['first_name'] ? 'is-invalid' : '' ?>">
@@ -175,8 +177,8 @@ if (getMethod() == 'POST') {
         <label for="gender" class="form-label">Gender:</label>
         <div id="gender" class="form-check">
           <input type="radio" name="gender" id="gender-male" value="male" <?= $gender == 'male' ? 'checked' : '' ?> class="form-check-input">
-          <label for="gender-male" class="form-check-label">Male</label><br>
-          
+          <label for="gender-male" class="form-check-label">Male</label>
+          <br>
           <input type="radio" name="gender" id="gender-female" value="female" <?= $gender == 'female' ? 'checked' : '' ?> class="form-check-input">
           <label for="gender-female" class="form-check-label">Female</label>
         </div>

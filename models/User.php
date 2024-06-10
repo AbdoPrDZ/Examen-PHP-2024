@@ -7,6 +7,7 @@ class User {
 
   /**
    * Create User instance
+   * 
    * @param int | null $id the user id
    * @param string $first_name the user first name
    * @param string $last_name the user last name
@@ -66,7 +67,7 @@ class User {
    * @return int | null the inserted user id if success or null
    */
   static function create(PDO $pdo, User $User): int | null {
-    $query = "INSERT INTO `Users` (`first_name`, `last_name`, `gender`, `birth_date`, `username`, `password`) VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO `users` (`first_name`, `last_name`, `gender`, `birth_date`, `username`, `password`) VALUES (?, ?, ?, ?, ?, ?)";
 
     $prep = $pdo->prepare($query);
 
@@ -76,7 +77,7 @@ class User {
       $User->gender,
       $User->birth_date,
       $User->username,
-      $User->password,
+      hash('md5', $User->password),
     ])) return $pdo->lastInsertId();
     
     return null;
@@ -89,7 +90,7 @@ class User {
    * @return boolean true if success otherwise false
    */
   function update(PDO $con): bool {
-    $query = "UPDATE `Users` SET `first_name` = ?, `last_name` = ?, `gender` = ?, `birth_date` = ?, `username` = ?, `password` = ? WHERE `id` = ?";
+    $query = "UPDATE `users` SET `first_name` = ?, `last_name` = ?, `gender` = ?, `birth_date` = ?, `username` = ?, `password` = ? WHERE `id` = ?";
 
     return $con->prepare($query)->execute([
       $this->first_name,
@@ -97,7 +98,7 @@ class User {
       $this->gender,
       $this->birth_date,
       $this->password,
-      $this->username,
+      hash('md5', $this->username),
       $this->id,
     ]);
   }
@@ -111,7 +112,7 @@ class User {
    * @return User | null the User instance if is exists or null of not
    */
   static function find(PDO $pdo, mixed $find, string $findBy = 'id'): User | null {
-    $query = "SELECT * FROM `Users` WHERE `$findBy` = :find";
+    $query = "SELECT * FROM `users` WHERE `$findBy` = :find";
 
     $prep = $pdo->prepare($query);
     $prep->bindParam(':find', $find, PDO::PARAM_STR);
@@ -136,7 +137,7 @@ class User {
    * @return User[] the array of User instances
    */
   static function where(PDO $pdo, string | array | null $where = null, string $whereMerge = 'AND', string | null $orderBy = null, string $orderType = "ASC") {
-    $query = "SELECT * FROM `Users`";
+    $query = "SELECT * FROM `users`";
 
     if ($where && is_string($where))
       $query .= $where;
@@ -197,7 +198,7 @@ class User {
    * @return boolean true if success otherwise false
    */
   static function remove(PDO $pdo, int $id): bool {
-    $query = "DELETE FROM `Users` WHERE `id` = :id";
+    $query = "DELETE FROM `users` WHERE `id` = :id";
     
     $prep = $pdo->prepare($query);
     $prep->bindParam(':id', $id, PDO::PARAM_STR);

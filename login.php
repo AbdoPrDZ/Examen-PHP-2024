@@ -8,10 +8,12 @@ require "./models/User.php";
 checkPage('login');
 
 // get parameters from request
-$username = getParameter('username');
-$password = getParameter('password');
+$username = getParameter('username', '');
+$password = getParameter('password', '');
 
-// set the user to null
+/**
+ * @var User | null $user the user
+ */
 $user = null;
 
 // set all the request errors to null
@@ -66,17 +68,19 @@ if (getMethod() == 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Login</title>
 
   <link href="resources/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
-  <?php
-    include_once 'views/menu.php';
-  ?>
-
   <div class="container">
+
+    <?php
+      include_once 'views/menu.php';
+    ?>
+
     <h1>Login</h1>
 
     <form action="" method="post">

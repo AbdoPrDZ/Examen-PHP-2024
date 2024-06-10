@@ -46,6 +46,7 @@ if ($id) {
     <h2>ID: <?= $user->id ?></h2>
     <h2>First name: <?= $user->first_name ?></h2>
     <h2>Last name: <?= $user->last_name ?></h2>
+    <h2>Username: <?= $user->username ?></h2>
     <h2>Gender: <?= $user->gender ?></h2>
     <h2>Birth date: <?= $user->birth_date ?></h2>
   </div>

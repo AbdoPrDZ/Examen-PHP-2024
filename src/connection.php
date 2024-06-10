@@ -9,17 +9,20 @@ define('DB_NAME', 'examen_auth');
 /**
  * Create pdo connection for app database
  *
- * @return PDO the pdo connection
+ * @return PDO | null the pdo connection
  */
-function connect() {
+function connect(): PDO | null {
   $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
   $user = DB_USER;
   $password = DB_PASS;
 
+  $con = null;
+
   try {
     $con = new PDO($dsn,$user,$password);
-    return $con;
   } catch (Exception $e) {
     logError("Connection failed: " . $e->getMessage());
   }
+
+  return $con;
 }
