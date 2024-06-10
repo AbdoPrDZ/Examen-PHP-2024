@@ -47,3 +47,11 @@
         - Access to users page
       - Error:
         - Show errors
+
+## Screenshots:
+
+- ![MCD](https://raw.github.com/AbdoPrDZ/Examen-PHP-2024/main/docs/screenshots/a.png)
+- ![MCD](https://raw.github.com/AbdoPrDZ/Examen-PHP-2024/main/docs/screenshots/b.png)
+- ![MCD](https://raw.github.com/AbdoPrDZ/Examen-PHP-2024/main/docs/screenshots/c.png)
+- ![MCD](https://raw.github.com/AbdoPrDZ/Examen-PHP-2024/main/docs/screenshots/d.png)
+- ![MCD](https://raw.github.com/AbdoPrDZ/Examen-PHP-2024/main/docs/screenshots/e.png)
